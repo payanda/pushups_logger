@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<center>
+    <div style="width: 80%;">
+        <h1>Welcome {{ user.name }}</h1>
+        
+        <!-- Show the flash message if exits here -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="flashes">
+            {{ messages[0] }}
+        </div>
+        {% endif %}
+        {% endwith %}
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Number of Push-Ups</th>
+                    <th scope="col">Performed At</th>
+                    <th scope="col">Comment</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for workout in workouts.items %}
+                <tr>
+                    <td>{{ workout.pushup }}</td>
+                    <td>{{ workout.date_posted.strftime('%m/%d/%Y') }}</td>
+                    <td>{{ workout.comment }}</td>
+                    <td>
+                        <a href="{{ url_for('main.update_workout', workout_id=workout.id) }}" class="btn btn-outline-success"
+                            role="button" style="width: 80px;">
+                            Edit
+                        </a>
+        
+                        <a href="{{ url_for('main.delete_workout', workout_id=workout.id) }}" class="btn btn-outline-danger"
+                            role="button" style="margin-left: 20px;">
+                            Delete
+                        </a>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% for page_num in workouts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=1) %}
+            {% if page_num %}
+                {% if workouts.page == page_num %}
+                    <a href="{{ url_for('main.user_workouts', page=page_num) }}" class="btn btn-info mb-4">{{ page_num }}</a>
+                {% else %}
+                    <a href="{{ url_for('main.user_workouts', page=page_num) }}" class="btn btn-outline-info mb-4">{{ page_num }}</a>
+            {% endif %}
+        {% else %}
+        ...
+        {% endif %}
+        {% endfor %}
+    </div>
+</center>
+{% endblock %}

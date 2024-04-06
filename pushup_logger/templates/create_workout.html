@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<center>
+    <dir style="width: 50%; text-align: center;">
+        <h2>Add New Workout </h2>
+        <form action="/new" method="post">
+            <div class="col">
+                <!-- For Pushups -->
+                <div class="form-floating mb-3">
+                    <label for=" pushup">Push ups</label>
+                    <input type="number" class="form-control" id="pushup" name="pushup"
+                        placeholder="Enter the number of Push Ups">
+                </div>
+            </div>
+        
+        
+            <div class="col">
+                <!-- For comments -->
+                <div class="form-floating mb-3">
+                    <label for="comment">Comments</label>
+                    <input type="text" class="form-control" id="comment" name="comment" placeholder="Comments">
+                </div>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button class="btn btn-primary" type="Submit" style="height: 50px;">Add New Workout</button>
+            </div>
+        </form>
+    </dir>
+</center>
+{% endblock %}

@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "my_conn",
+            "database": "${workspaceFolder:pushup_logger}/db.sqlite"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}
